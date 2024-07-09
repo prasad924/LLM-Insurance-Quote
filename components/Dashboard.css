@@ -1,0 +1,25 @@
+
+.dashboard {
+    background-image: url('/Dashboard.png');
+    background-size:cover;
+}
+:root{
+    font-family: "Inter,sans-serif";
+}
+.titles {
+    font-weight: 800px;
+    font-size: 30.49px;
+    font-weight: bold;
+    margin : 20px 0 20px 0
+}
+.MainTitle {
+    color: black;
+    font-weight: bold;
+    font-size: 36.49px;
+}
+li {
+    font-family: "Inter,sans-serif";
+    font-size: 19px;
+    color: #5E6C84;
+    line-height: 200%;
+}

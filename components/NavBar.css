@@ -1,0 +1,15 @@
+nav {
+    background-image: url('../assets/Nav-image.png');
+    background-size: cover;
+}
+
+.logo {
+    object-fit: contain;
+    width: 80px;
+    height: 80px;
+}
+.nav-buttons {
+    background-color: #C4FFBF;
+}
+
+
