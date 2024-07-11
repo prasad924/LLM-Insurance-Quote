@@ -1,16 +1,41 @@
 import React from 'react'
 import './Dashboard.css'
-import NavBar from './NavBar'
+import NavBar from '../NavBar/NavBar'
+import Carousel from './Carousel'
+const slides = [{
+    path: "../assets/1-month.jpg",
+    id: 1
+},
+{
+    path: "../assets/6-month.jpg",
+    id: 6
+},
+{
+    path: "../assets/12-month.jpg",
+    id: 12
+}
+];
 const Dashboard = () => {
+
     return (
         <>
             <NavBar items={[
                 { title: "Explore", path: "../assets/Explore.svg" },
                 { title: "Help", path: "../assets/Help.svg" }
             ]} />
-            <div className='flex dashboard h-screen select-none'>
-                <p className='text-white w-1/2 p-10' style={{ fontFamily: "Inter, sans-serif", fontSize: '71.74px', fontWeight: 800 }}>Generate the best Insurance Quote for your Life.</p>
+            <div className='dashboard select-none py-10'>
+                <div className='flex flex-col w-2/3'>
+                    <p className='text-white p-10' style={{ fontFamily: "Inter, sans-serif", fontSize: '5vw', fontWeight: 800 }}>Generate the best Insurance Quote for your Life.</p>
+                    <div className=' flex justify-center'>
+                        <div className='bg-white w-96 m-5 p-5  rounded-3xl border border-black' >
+                            <Carousel slides={slides} />
+                        </div>
+                    </div>
+                    <div id='Generate-btn' className='cursor-pointing'>
+                        Continue to generate Quote
+                    </div>
 
+                </div>
             </div>
             <div className='m-14'>
                 <p className='MainTitle'>Know More about Health Insurance</p>

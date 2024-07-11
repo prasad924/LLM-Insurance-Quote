@@ -1,6 +1,7 @@
 nav {
     background-image: url('../assets/Nav-image.png');
     background-size: cover;
+    font-size: 10px;
 }
 
 .logo {
