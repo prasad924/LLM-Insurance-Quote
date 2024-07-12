@@ -1,0 +1,19 @@
+@media print {
+    
+}
+.chat,textarea::-webkit-scrollbar {
+    display: none;
+}
+.chat,textarea {
+    
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+.myInput>img {
+    height: 40px;
+    width: 40px;
+}
+.LLMOutput>img {
+    height: 40px;
+    width: 40px;
+}

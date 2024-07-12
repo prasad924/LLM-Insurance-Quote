@@ -26,10 +26,7 @@ const providers = [
 const Explore = () => {
   return (
     <>
-      <NavBar items={[
-        { title: "Home", path: "../assets/Home.svg" },
-        { title: "Help", path: "../assets/Help.svg" }
-      ]} />
+      
       <div className='p-10'>
         <p className='' style={{ fontFamily: "Inter,sans-serif", fontSize: '39.49px' }}>Top Insurance Providers</p>
         <div>
