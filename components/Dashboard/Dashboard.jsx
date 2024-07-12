@@ -2,6 +2,7 @@ import React from 'react'
 import './Dashboard.css'
 import NavBar from '../NavBar/NavBar'
 import Carousel from './Carousel'
+import { NavLink } from 'react-router-dom';
 const slides = [{
     path: "../assets/1-month.jpg",
     id: 1
@@ -19,10 +20,7 @@ const Dashboard = () => {
 
     return (
         <>
-            <NavBar items={[
-                { title: "Explore", path: "../assets/Explore.svg" },
-                { title: "Help", path: "../assets/Help.svg" }
-            ]} />
+            
             <div className='dashboard select-none py-10'>
                 <div className='flex flex-col w-2/3'>
                     <p className='text-white p-10' style={{ fontFamily: "Inter, sans-serif", fontSize: '5vw', fontWeight: 800 }}>Generate the best Insurance Quote for your Life.</p>
@@ -31,9 +29,9 @@ const Dashboard = () => {
                             <Carousel slides={slides} />
                         </div>
                     </div>
-                    <div id='Generate-btn' className='cursor-pointing'>
-                        Continue to generate Quote
-                    </div>
+                    <NavLink to={'/generate-quote'} id='Generate-btn' className='cursor-pointing'>
+                        Not listed! Generate other Quote
+                    </NavLink>
 
                 </div>
             </div>

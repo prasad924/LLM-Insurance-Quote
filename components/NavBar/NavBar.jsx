@@ -1,13 +1,14 @@
 import React from 'react'
 import './NavBar.css'
+import { NavLink } from 'react-router-dom';
 
 const NavBar = ({items}) => {
   const renderButtons = () => {
     return items.map((item, index) => (
-      <div key={index} className='flex items-center justify-center gap-1 nav-buttons h-10 w-24 rounded-lg cursor-pointing'>
-        <img src={item.path} alt={item.title} />
+      <NavLink to={item.path} key={index} className='flex items-center justify-center gap-1 nav-buttons h-10 w-24 rounded-lg cursor-pointing'>
+        <img src={item.imgpath} alt={item.title} />
         <p style={{ fontFamily: "Inter, sans-serif", fontSize: '16.49px' }}>{item.title}</p>
-      </div>
+      </NavLink>
     ));
   };
 
@@ -15,7 +16,7 @@ const NavBar = ({items}) => {
     <nav className='flex justify-between'>
       <div className='flex items-center'>
         <img className='logo' src="/LOGO.png" alt="Logo" />
-        <div>
+        <div className='select-none'>
           <p style={{fontFamily:'"Jim Nightshade", cursive', fontSize:'28.74px'}}>LLM Insurance</p>
           <p style={{fontFamily:'"Jim Nightshade", cursive', fontSize:'11.74px'}}>Find the best Quote for your life.</p>
         </div>

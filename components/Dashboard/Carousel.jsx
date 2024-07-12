@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Carousel.css';
+import { NavLink } from 'react-router-dom';
 
 const Carousel = ({ slides }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
