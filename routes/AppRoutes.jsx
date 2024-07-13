@@ -17,13 +17,11 @@ const AppRoutes = () => {
                     ]}
                 /><Dashboard /></>} />
                 <Route path="/explore" element={<><NavBar items={[
-                    { title: "Home", path: '/', imgpath: "../assets/Home.svg" },
                     { title: "Help", path: '/help', imgpath: "../assets/Help.svg" }
                 ]} /><Explore /></>} />
                 <Route path="/help" element={<Help />} />
                 <Route path="/generate-quote" element={<>
                     <NavBar items={[
-                        { title: "Home", path: '/', imgpath: "../assets/Home.svg" },
                         { title: "Help", path: '/help', imgpath: "../assets/Help.svg" }
                     ]} /><QuoteGeneration /></>} />
                 <Route path="*" element={<Navigate to="/" />} />

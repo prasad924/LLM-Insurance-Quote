@@ -1,8 +1,9 @@
 import React from 'react';
+import './Logins.css'
 
 const SignUpForm = () => {
     return (
-        <div className=''>
+        <div className='SignUp'>
             <img className='fixed top-0' src="/LOGO.png" alt="Image" style={{width:'215px', height:'180px'}}/>
             <div className='h-screen flex justify-center items-center'>
                 <div className="flex flex-col items-center border-none rounded-3xl shadow-3xl" style={{ height: '556px', width: '470px', backgroundColor: 'rgb(255, 255, 255,0.1)' }}>

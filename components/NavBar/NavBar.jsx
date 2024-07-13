@@ -14,13 +14,13 @@ const NavBar = ({items}) => {
 
   return (
     <nav className='flex justify-between'>
-      <div className='flex items-center'>
+      <NavLink to={'/'} className='flex items-center cursor-pointing'>
         <img className='logo' src="/LOGO.png" alt="Logo" />
         <div className='select-none'>
           <p style={{fontFamily:'"Jim Nightshade", cursive', fontSize:'28.74px'}}>LLM Insurance</p>
           <p style={{fontFamily:'"Jim Nightshade", cursive', fontSize:'11.74px'}}>Find the best Quote for your life.</p>
         </div>
-      </div>
+      </NavLink>
       <div className='flex gap-6 items-center select-none p-2'>
         {renderButtons()}
         {/* <div className='flex items-center mr-2 cursor-pointing'>
