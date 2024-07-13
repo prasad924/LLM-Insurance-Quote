@@ -43,7 +43,7 @@ const QuoteGeneration = () => {
             
             <div style={{
                 height: 'calc(100vh - 80px)',
-                backgroundImage: `url('../assets/ChatBot-bg.png')`,
+                backgroundImage: `url('./src/assets/ChatBot-bg.png')`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center'
             }}>
@@ -54,11 +54,11 @@ const QuoteGeneration = () => {
                             {message.sender === 'user' ? (
                                 <>
                                     <div className='border border-black  rounded-3xl content-center px-5 py-2.5 whitespace-pre-wrap overflow-y-auto' style={{ backgroundColor: '#E9E9E9', maxWidth: '50vw', wordWrap: 'break-word' }}>{message.text}</div>
-                                    <img src="../assets/Profile.png" alt="user" />
+                                    <img src="./src/assets/Profile.png" alt="user" />
                                 </>
                             ) : (
                                 <>
-                                    <img src="../assets/chatbot.png" alt="bot" />
+                                    <img src="./src/assets/chatbot.png" alt="bot" />
                                     <div className='border border-black rounded-full content-center bg-white  px-5 py-2.5 whitespace-pre-wrap overflow-y-auto' style={{ maxWidth: '50vw', wordWrap: 'break-word' }}>{message.text}</div>
                                 </>
                             )}
@@ -76,7 +76,7 @@ const QuoteGeneration = () => {
                     />
                     <button className='bg-black w-36 p-2 h-14 flex rounded-lg items-center justify-center gap-2 cursor-pointing' onClick={handleUserClick}>
                         <p className='text-white'>Send</p>
-                        <img src="../assets/send.svg" alt="send" className='text-xs rounded-lg' />
+                        <img src="./src/assets/send.svg" alt="send" className='text-xs rounded-lg' />
                     </button>
                 </div>
             </div>
