@@ -4,15 +4,15 @@ import NavBar from '../NavBar/NavBar'
 import Carousel from './Carousel'
 import { NavLink } from 'react-router-dom';
 const slides = [{
-    path: "./src/assets/1-month.jpg",
+    path: "/1-month.jpg",
     id: 1
 },
 {
-    path: "./src/assets/6-month.jpg",
+    path: "/6-month.jpg",
     id: 6
 },
 {
-    path: "./src/assets/12-month.jpg",
+    path: "/12-month.jpg",
     id: 12
 }
 ];

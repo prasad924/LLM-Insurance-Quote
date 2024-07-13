@@ -24,8 +24,8 @@ const NavBar = ({items}) => {
       <div className='flex gap-6 items-center select-none p-2'>
         {renderButtons()}
         {/* <div className='flex items-center mr-2 cursor-pointing'>
-          <img className='p-2' src="./src/assets/profile.png" alt="profile" />
-          <img src="./src/assets/Down-arrow.svg" alt="img" />
+          <img className='p-2' src="/profile.png" alt="profile" />
+          <img src="/Down-arrow.svg" alt="img" />
         </div> */}
       </div>
     </nav>

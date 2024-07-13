@@ -10,7 +10,7 @@ const Help = () => {
     return (
         <div className='Help'>
             <div onClick={goBack} className='absolute top-5 flex gap-2 mx-5 cursor-pointing'>
-                <img src="./src/assets/arrow.svg" alt="image" />
+                <img src="/arrow.svg" alt="image" />
                 <p className='' style={{ fontFamily: "Inter, sans-serif", fontSize: '21.74px' }}>Back</p>
             </div>
             <div className='select-none h-screen flex justify-center items-center'>
