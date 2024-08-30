@@ -9,7 +9,6 @@ import GeneratedQuote from '../components/QuoteGeneration/GeneratedQuote'
 
 const AppRoutes = () => {
     return (
-        
             <Routes>
                 <Route path="/" element={<><NavBar
                     items={[

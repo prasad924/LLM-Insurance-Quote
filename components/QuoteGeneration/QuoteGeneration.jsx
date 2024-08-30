@@ -1,8 +1,18 @@
 import React, { useEffect, useState } from "react";
-import "./QuoteGeneration.css";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import { useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+import {
+  InputLabel,
+  MenuItem,
+  FormHelperText,
+  FormControl,
+  Select,
+  Box,
+  Typography,
+  Slider,
+  TextField,
+  Grid,
+} from "@mui/material";
 
 const QuoteGeneration = () => {
   const location = useLocation();
@@ -10,13 +20,14 @@ const QuoteGeneration = () => {
     months: "",
     age: "",
     gender: "",
-    bmi: "",
+    bmi: 0,
     children: "",
     smoker: "",
     medical_history: "",
     family_medical_history: "",
     exercise_frequency: "",
   });
+
   useEffect(() => {
     if (location.state?.text) {
       setFormData((prevState) => ({
@@ -25,10 +36,10 @@ const QuoteGeneration = () => {
       }));
     }
   }, [location.state]);
-  
-  const [quotation, setQuotation] = useState("");
+
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
+  const [quotation,setQuotation] = useState("");
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -37,17 +48,20 @@ const QuoteGeneration = () => {
     }));
   };
 
-  const chatBotOutput = async (e) => {
+  const handleSliderChange = (event, newValue) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      bmi: newValue,
+    }));
+  };
+
+  const chatBotOutput = async () => {
     setLoading(true);
     try {
-      const response = await axios.post(
-        "http://localhost:5000/get-quote",
-        formData
-      );
+      const response = await axios.post("http://localhost:5000/get-quote", formData);
       setQuotation(response.data.quotation);
-      navigate("/generatedQuote", { state: { response: response.data.quotation } });
     } catch (err) {
-      console.log(err.message);
+      console.error(err.message);
     } finally {
       setLoading(false);
     }
@@ -55,11 +69,12 @@ const QuoteGeneration = () => {
 
   const handleUserClick = async (e) => {
     e.preventDefault();
-    await chatBotOutput(e);
+    await chatBotOutput();
     setFormData({
+      months: "",
       age: "",
       gender: "",
-      bmi: "",
+      bmi: 0,
       children: "",
       smoker: "",
       medical_history: "",
@@ -69,161 +84,165 @@ const QuoteGeneration = () => {
   };
 
   return (
-    <>
-      <div
+    <div
+      style={{
+        height: "calc(100vh - 80px)",
+        backgroundImage: `url('/ChatBot-bg.webp')`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
+      <p
+        className="underline text-center select-none"
         style={{
-          height: "calc(100vh - 80px)",
-          backgroundImage: `url('/ChatBot-bg.webp')`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
+          fontFamily: `"Inria Serif", serif`,
+          fontWeight: 400,
+          fontSize: "48px",
         }}
       >
-        <p
-          className="underline text-center select-none"
-          style={{
-            fontFamily: `"Inria Serif", serif`,
-            fontWeight: 400,
-            fontSize: "48px",
-          }}
-        >
-          Quote Generation
-        </p>
-        {/* <div
-          id="chat"
-          className="chat overflow-y-scroll fixed bottom-28 w-screen flex flex-col gap-2"
-          style={{ maxHeight: "65vh" }}
-        >
-          {messages.map((message, index) => (
-            <div
-              key={index}
-              className={
-                message.sender === "user"
-                  ? "myInput flex justify-end gap-2 mx-8"
-                  : "LLMOutput flex gap-2 mx-8"
-              }
-            >
-              {message.sender === "user" ? (
-                <>
-                  <div
-                    className="border border-black  rounded-3xl content-center px-5 py-2.5 whitespace-pre-wrap overflow-y-auto"
-                    style={{
-                      backgroundColor: "#E9E9E9",
-                      maxWidth: "50vw",
-                      wordWrap: "break-word",
-                    }}
-                  >
-                    {message.text}
-                  </div>
-                  <img src="/Profile.webp" alt="user" />
-                </>
-              ) : (
-                <>
-                  <img src="/chatbot.webp" alt="bot" />
-                  <div
-                    className="border border-black rounded-full content-center bg-white  px-5 py-2.5 whitespace-pre-wrap overflow-y-auto"
-                    style={{ maxWidth: "50vw", wordWrap: "break-word" }}
-                  >
-                    {message.text}
-                  </div>
-                </>
-              )}
-            </div>
-          ))}
-        </div> */}
-        <form onSubmit={handleUserClick}>
-          <div>
-            <label>
-              Age:
-              <input
-                type="number"
+        Quote Generation
+      </p>
+
+      <form onSubmit={handleUserClick} style={{ padding: "16px" }}>
+        <Grid container spacing={2} justifyContent="center" alignItems="center">
+          <Grid item xs={12} sm={6} >
+            <Box sx={{ "& .MuiTextField-root": { m: 1, width: "100%", } }}>
+              <TextField
+                required
+                id="outlined-age"
+                label="Age"
                 name="age"
+                type="number"
                 value={formData.age}
                 onChange={handleChange}
+                inputProps={{ min: 0 }}
               />
-            </label>
-          </div>
-          <div>
-            <label>
-              Gender:
-              <input
-                type="text"
+            </Box>
+          </Grid>
+
+          <Grid item xs={12} sm={6}>
+            <FormControl sx={{ m: 1, width: "100%" }} required >
+              <InputLabel id="gender-label">Gender</InputLabel>
+              <Select
+              //  className="cursor-text"
+                labelId="gender-label"
+                id="gender-select"
                 name="gender"
                 value={formData.gender}
+                label="Gender *"
                 onChange={handleChange}
-              />
-            </label>
-          </div>
-          <div>
-            <label>
-              BMI:
-              <input
-                type="number"
-                name="bmi"
+              >
+                <MenuItem value={"Male"}>Male</MenuItem>
+                <MenuItem value={"Female"}>Female</MenuItem>
+              </Select>
+              <FormHelperText>Required</FormHelperText>
+            </FormControl>
+          </Grid>
+
+          <Grid item xs={12} sm={6}>
+            <Box
+              sx={{
+                width: "100%",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center", 
+                justifyContent: "center", 
+                textAlign: "center",
+                m: "auto", 
+              }}
+            >
+              <Typography id="non-linear-slider" gutterBottom>
+                BMI: {formData.bmi.toFixed(1)}
+              </Typography>
+              <Slider
                 value={formData.bmi}
-                onChange={handleChange}
+                min={0}
+                step={0.1}
+                max={100}
+                onChange={handleSliderChange}
+                valueLabelDisplay="auto"
+                aria-labelledby="non-linear-slider"
+                sx={{ width: "100%" }}
               />
-            </label>
-          </div>
-          <div>
-            <label>
-              Children:
-              <input
-                type="number"
+            </Box>
+          </Grid>
+
+          <Grid item xs={12} sm={6}>
+            <Box sx={{ "& .MuiTextField-root": { m: 1, width: "100%" } }}>
+              <TextField
+                id="outlined-children"
+                label="Children"
                 name="children"
+                type="number"
                 value={formData.children}
                 onChange={handleChange}
+                inputProps={{ min: 0 }}
               />
-            </label>
-          </div>
-          <div>
-            <label>
-              Smoker:
-              <input
-                type="text"
+            </Box>
+          </Grid>
+
+          <Grid item xs={12} sm={6}>
+            <FormControl sx={{ m: 1, width: "100%" }} required>
+              <InputLabel id="smoker-label">Smoker</InputLabel>
+              <Select
+                labelId="smoker-label"
+                id="smoker-select"
                 name="smoker"
                 value={formData.smoker}
+                label="Smoker *"
                 onChange={handleChange}
-              />
-            </label>
-          </div>
-          <div>
-            <label>
-              Medical History:
-              <input
-                type="text"
+              >
+                <MenuItem value={"Yes"}>Yes</MenuItem>
+                <MenuItem value={"No"}>No</MenuItem>
+              </Select>
+              <FormHelperText>Required</FormHelperText>
+            </FormControl>
+          </Grid>
+
+          <Grid item xs={12} sm={6}>
+            <Box sx={{ "& .MuiTextField-root": { m: 1, width: "100%" } }}>
+              <TextField
+                id="outlined-medical-history"
+                label="Medical History"
                 name="medical_history"
                 value={formData.medical_history}
                 onChange={handleChange}
               />
-            </label>
-          </div>
-          <div>
-            <label>
-              Family Medical History:
-              <input
-                type="text"
+            </Box>
+          </Grid>
+
+          <Grid item xs={12} sm={6}>
+            <Box sx={{ "& .MuiTextField-root": { m: 1, width: "100%" } }}>
+              <TextField
+                id="outlined-family-medical-history"
+                label="Family Medical History"
                 name="family_medical_history"
                 value={formData.family_medical_history}
                 onChange={handleChange}
               />
-            </label>
-          </div>
-          <div>
-            <label>
-              Exercise Frequency:
-              <input
-                type="text"
+            </Box>
+          </Grid>
+
+          <Grid item xs={12} sm={6}>
+            <Box sx={{ "& .MuiTextField-root": { m: 1, width: "100%" } }}>
+              <TextField
+                id="outlined-exercise-frequency"
+                label="Exercise Frequency"
                 name="exercise_frequency"
                 value={formData.exercise_frequency}
                 onChange={handleChange}
               />
-            </label>
-          </div>
+            </Box>
+          </Grid>
+        </Grid>
 
+        <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
           <button
             type="submit"
             disabled={loading}
-            className="bg-black w-36 p-2 h-14 flex rounded-lg items-center justify-center gap-2 cursor-pointing"
+            className={`bg-black w-36 p-2 h-14 flex rounded-lg items-center justify-center gap-2 ${
+              loading ? "cursor-not-allowed" : "cursor-pointing"
+            }`}
           >
             {loading ? (
               <p className="text-white">Submitting...</p>
@@ -238,18 +257,15 @@ const QuoteGeneration = () => {
               </>
             )}
           </button>
-        </form>
-      </div>
-    </>
+        </Box>
+      </form>
+      {quotation && (
+        <div className="flex justify-center p-10 text-6xl">
+          <p>Your estimated Quote is : ₹{quotation}</p>
+        </div>
+      )}
+    </div>
   );
 };
 
 export default QuoteGeneration;
-
-{
-  /* <div className='flex gap-3 fixed bottom-4 w-screen justify-between items-center px-2'>
-          
-          </div>
-          className='cursor-text m-0 resize-none border-0 px-0 focus:ring-0 focus-visible:ring-0'
-          style={{ width: 'inherit', borderRadius: '8px', height: '80px', padding: '20px' }} */
-}
