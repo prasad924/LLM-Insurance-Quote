@@ -15,17 +15,17 @@ const Dashboard = () => {
     const handleClick = (slideId) => {
         if (slideId === 1) {
             navigate('/generate-quote', {
-                state: { text: "Generate me a health insurance quote for 1 Months with the details :" }
+                state: { text: "1" }
             });
         }
         else if (slideId === 6) {
             navigate('/generate-quote', {
-                state: { text: "Generate me a health insurance quote for 6 Months with the details :" }
+                state: { text: "6" }
             });
         }
         else if (slideId === 12) {
             navigate('/generate-quote', {
-                state: { text: "Generate me a health insurance quote for 1 Month with the details :" }
+                state: { text: "12" }
             });
         }
     };

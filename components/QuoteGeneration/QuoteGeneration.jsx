@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   InputLabel,
   MenuItem,
-  FormHelperText,
   FormControl,
   Select,
   Box,
@@ -16,6 +15,7 @@ import {
 
 const QuoteGeneration = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     months: "",
     age: "",
@@ -58,9 +58,9 @@ const QuoteGeneration = () => {
   const chatBotOutput = async () => {
     setLoading(true);
     try {
-      // const response = await axios.post("http://localhost:5000/get-quote", formData);
-      // setQuotation(response.data.quotation);
-setQuotation(Math.random()*100)      
+      const response = await axios.post("http://localhost:5000/get-quote", formData);
+      setQuotation(response.data.quotation);
+      setQuotation("quotation is" + Math.random()*100) //use for simulation purposes if backend is not avaliable 
     } catch (err) {
       console.error(err.message);
     } finally {
@@ -68,20 +68,25 @@ setQuotation(Math.random()*100)
     }
   };
 
+  const print = () => {
+    navigate('/print-quote', {
+      state: { form: formData, quote : quotation }
+  });
+  }
   const handleUserClick = async (e) => {
     e.preventDefault();
     await chatBotOutput();
-    setFormData({
-      months: "",
-      age: "",
-      gender: "",
-      bmi: 0,
-      children: "",
-      smoker: "",
-      medical_history: "",
-      family_medical_history: "",
-      exercise_frequency: "",
-    });
+    // setFormData({
+    //   months: "",
+    //   age: "",
+    //   gender: "",
+    //   bmi: 0,
+    //   children: "",
+    //   smoker: "",
+    //   medical_history: "",
+    //   family_medical_history: "",
+    //   exercise_frequency: "",
+    // });
   };
 
   return (
@@ -260,10 +265,9 @@ setQuotation(Math.random()*100)
       </form>
       {quotation && (
         <div className="flex flex-col items-center justify-center gap-2">
-          <p className="text-5xl">Your estimated {quotation}(₹ Rupees)</p>
-          <button className="bg-slate-400 p-2 flex rounded-lg text-white text-center cursor-pointing ">Print</button>
+          <p className="text-5xl">Your estimated Quote is ₹{quotation.match(/\d*\.?\d+/g)[0]}</p>
+          <button className="bg-slate-400 p-2 flex rounded-lg text-white text-center cursor-pointing " onClick={print}>Print</button>
         </div>
-        
       )}
     </div>
   );
