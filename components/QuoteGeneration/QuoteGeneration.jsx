@@ -60,7 +60,7 @@ const QuoteGeneration = () => {
     try {
       const response = await axios.post("http://localhost:5000/get-quote", formData);
       setQuotation(response.data.quotation);
-      setQuotation("quotation is" + Math.random()*100) //use for simulation purposes if backend is not avaliable 
+      // setQuotation("quotation is" + Math.random()*100) //use for simulation purposes if backend is not avaliable 
     } catch (err) {
       console.error(err.message);
     } finally {
