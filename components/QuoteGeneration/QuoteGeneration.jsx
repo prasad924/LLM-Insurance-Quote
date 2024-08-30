@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import {
   InputLabel,
   MenuItem,
@@ -58,8 +58,9 @@ const QuoteGeneration = () => {
   const chatBotOutput = async () => {
     setLoading(true);
     try {
-      const response = await axios.post("http://localhost:5000/get-quote", formData);
-      setQuotation(response.data.quotation);
+      // const response = await axios.post("http://localhost:5000/get-quote", formData);
+      // setQuotation(response.data.quotation);
+setQuotation(Math.random()*100)      
     } catch (err) {
       console.error(err.message);
     } finally {
@@ -135,7 +136,6 @@ const QuoteGeneration = () => {
                 <MenuItem value={"Male"}>Male</MenuItem>
                 <MenuItem value={"Female"}>Female</MenuItem>
               </Select>
-              <FormHelperText>Required</FormHelperText>
             </FormControl>
           </Grid>
 
@@ -195,7 +195,6 @@ const QuoteGeneration = () => {
                 <MenuItem value={"Yes"}>Yes</MenuItem>
                 <MenuItem value={"No"}>No</MenuItem>
               </Select>
-              <FormHelperText>Required</FormHelperText>
             </FormControl>
           </Grid>
 
@@ -260,9 +259,11 @@ const QuoteGeneration = () => {
         </Box>
       </form>
       {quotation && (
-        <div className="flex justify-center p-10 text-6xl">
-          <p>Your estimated Quote is : ₹{quotation}</p>
+        <div className="flex flex-col items-center justify-center gap-2">
+          <p className="text-5xl">Your estimated {quotation}(₹ Rupees)</p>
+          <button className="bg-slate-400 p-2 flex rounded-lg text-white text-center cursor-pointing ">Print</button>
         </div>
+        
       )}
     </div>
   );
