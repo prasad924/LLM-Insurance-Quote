@@ -5,6 +5,7 @@ import Dashboard from "../components/Dashboard/Dashboard";
 import Help from "../components/Help/Help";
 import Explore from "../components/Explore/Explore";
 import QuoteGeneration from '../components/QuoteGeneration/QuoteGeneration'
+import GeneratedQuote from '../components/QuoteGeneration/GeneratedQuote'
 
 const AppRoutes = () => {
     return (
@@ -24,6 +25,10 @@ const AppRoutes = () => {
                     <NavBar items={[
                         { title: "Help", path: '/help', imgpath: "/Help.svg" }
                     ]} /><QuoteGeneration /></>} />
+                    <Route path="/generatedQuote" element={<>
+                    <NavBar items={[
+                        { title: "Help", path: '/help', imgpath: "/Help.svg" }
+                    ]} /><GeneratedQuote/></>} />
                 <Route path="*" element={<Navigate to="/" />} />
             </Routes>
     )

@@ -15,7 +15,7 @@ const NavBar = ({items}) => {
   return (
     <nav className='flex justify-between'>
       <NavLink to={'/'} className='flex items-center cursor-pointing'>
-        <img className='logo' src="/LOGO.png" alt="Logo" />
+        <img className='logo' src="/LOGO.svg" alt="Logo" />
         <div className='select-none'>
           <p style={{fontFamily:'"Jim Nightshade", cursive', fontSize:'28.74px'}}>LLM Insurance</p>
           <p style={{fontFamily:'"Jim Nightshade", cursive', fontSize:'11.74px'}}>Find the best Quote for your life.</p>
@@ -24,7 +24,7 @@ const NavBar = ({items}) => {
       <div className='flex gap-6 items-center select-none p-2'>
         {renderButtons()}
         {/* <div className='flex items-center mr-2 cursor-pointing'>
-          <img className='p-2' src="/profile.png" alt="profile" />
+          <img className='p-2' src="/profile.webp" alt="profile" />
           <img src="/Down-arrow.svg" alt="img" />
         </div> */}
       </div>
